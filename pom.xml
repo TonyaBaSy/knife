@@ -15,7 +15,7 @@
         <fastjson.version>1.2.62</fastjson.version>
         <scala.binary.version>2.11</scala.binary.version>
         <scala.plugin.version>3.3.2</scala.plugin.version>
-        <scala.dep.version>${scala.binary.version}.8</scala.dep.version>
+        <scala.dep.version>${scala.binary.version}.12</scala.dep.version>
         <maven.shade.version>3.0.0</maven.shade.version>
         <maven.compiler.version>3.1</maven.compiler.version>
     </properties>
@@ -27,12 +27,28 @@
             <artifactId>flink-java</artifactId>
             <version>${flink.version}</version>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-lang3</artifactId>
+                    <groupId>org.apache.commons</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-streaming-java_${scala.binary.version}</artifactId>
             <version>${flink.version}</version>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-lang3</artifactId>
+                    <groupId>org.apache.commons</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- 第三方依赖 -->
@@ -41,6 +57,12 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.7</version>
             <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
