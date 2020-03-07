@@ -4,7 +4,7 @@
 
     <groupId>tony.pancocoa.knife</groupId>
     <artifactId>knife</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <modules>
         <module>knife-parent</module>
         <module>knife-common</module>

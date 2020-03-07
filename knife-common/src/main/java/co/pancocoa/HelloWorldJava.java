@@ -1,4 +1,4 @@
-package tony.pancocoa;
+package co.pancocoa;
 
 public class HelloWorldJava {
     public static void main(String[] args) {

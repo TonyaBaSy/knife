@@ -1,4 +1,4 @@
-package tony.pancocoa
+package co.pancocoa
 
 import org.apache.flink.streaming.api.scala._
 
