@@ -1,5 +1,5 @@
 .idea/
-/target/
+**/target/
 /out/
 *.iml
 *.DS_Store
