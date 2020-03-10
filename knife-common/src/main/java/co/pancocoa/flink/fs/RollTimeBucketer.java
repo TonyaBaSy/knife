@@ -1,5 +1,6 @@
 package co.pancocoa.flink.fs;
 
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.flink.streaming.connectors.fs.Clock;
 import org.apache.flink.streaming.connectors.fs.bucketing.Bucketer;
 import org.apache.hadoop.fs.Path;
@@ -27,8 +28,8 @@ public class RollTimeBucketer<T> implements Bucketer<T> {
 
     private final String formatString;
     private final long rollIntervalMillis;
-
-    private final DateTimeFormatter formatter;
+    private final ZoneId zoneId;
+    private volatile transient DateTimeFormatter formatter;
 
     public RollTimeBucketer() {
         this(DEFAULT_DATE_FORMAT, ZoneId.systemDefault(), DEFAULT_ROLL_INTERVAL_MILLIS);
@@ -41,14 +42,17 @@ public class RollTimeBucketer<T> implements Bucketer<T> {
     public RollTimeBucketer(String formatString, ZoneId zoneId, long rollIntervalMillis) {
         this.formatString = formatString;
         this.rollIntervalMillis = rollIntervalMillis;
-
-        this.formatter = DateTimeFormatter.ofPattern(this.formatString).withZone(zoneId);
+        this.zoneId = zoneId;
     }
 
     @Override
     public Path getBucketPath(Clock clock, Path baseDir, T t) {
+        if (formatter == null) {
+            this.formatter = DateTimeFormatter.ofPattern(this.formatString).withZone(zoneId);
+        }
+
         long currMillis = clock.currentTimeMillis() / this.rollIntervalMillis * this.rollIntervalMillis;
-        String bucketId = this.formatter.format(Instant.ofEpochMilli(currMillis));
+        String bucketId = DateFormatUtils.format(currMillis, formatString);
 
         return new Path(baseDir, bucketId);
     }
