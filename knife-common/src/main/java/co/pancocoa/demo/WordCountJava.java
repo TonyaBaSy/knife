@@ -1,4 +1,4 @@
-package co.pancocoa;
+package co.pancocoa.demo;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.functions.ReduceFunction;
@@ -8,13 +8,13 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.Collector;
 
 /**
- * 需要先开启: nc -lk 9000
+ * 需要先开启: nc -lk 8088
  */
 public class WordCountJava {
     public static void main(String[] args) throws Exception {
 
         final String hostname = "localhost";
-        final int port = 9000;
+        final int port = 8088;
 
         // get the execution environment
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

@@ -1,14 +1,14 @@
-package co.pancocoa
+package co.pancocoa.demo
 
-import org.apache.flink.streaming.api.scala._
+import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
 
 /**
- * nc -lk 9000
+ * nc -lk 8088
  */
 object WordCount {
   def main(args: Array[String]): Unit = {
     val hostname = "localhost"
-    val port = 9000
+    val port = 8088
 
     val env = StreamExecutionEnvironment.getExecutionEnvironment
     val text:DataStream[String] = env.socketTextStream(hostname, port, '\n')
@@ -21,5 +21,6 @@ object WordCount {
       .sum(1)
 
     counts.print()
+    env.execute("socket word count")
   }
 }

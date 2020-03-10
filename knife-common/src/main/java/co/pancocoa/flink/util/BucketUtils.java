@@ -1,4 +1,4 @@
-package co.pancocoa.utils;
+package co.pancocoa.flink.util;
 
 import co.pancocoa.flink.fs.CompressionType;
 import co.pancocoa.flink.fs.RollTimeBucketer;
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 import static co.pancocoa.utils.Constants.Bucketing.DEFAULT_DATE_FORMAT;
 
 /**
- * 创建 BucketingSink, 支持压缩类型的 SequenceFile 输出(gzip/snappy/lz4/bzip)和 String 类型.
+ * 快速创建 BucketingSink, 支持压缩类型的 SequenceFile 输出(gzip/snappy/lz4/bzip)和 String 类型.
  *
  * @author wangzhao
  * @date 2020/3/7
